@@ -18,8 +18,13 @@ let getBreedImage = breed => {
 };
 
 let displayBreedResults = responseJson => {
-  console.log(responseJson.message);
-  $(".results-img").attr("src", responseJson.message);
+  console.log("DOG CEO RESPONSE " + responseJson.message);
+  // <img src="" alt="">
+  if (responseJson.message == "Breed not found") {
+    alert(responseJson.message);
+    return;
+  }
+  $(".results-img").html(`<img src = "${responseJson.message}"/>`);
   $(".results").removeClass("hidden");
 };
 
@@ -30,7 +35,7 @@ let watchBreedForm = () => {
       .find(".js-query-breed")
       .val();
     console.log(breed);
-    getBreedImage(breed);
+    getBreedImage(breed.toLowerCase());
   });
 };
 
